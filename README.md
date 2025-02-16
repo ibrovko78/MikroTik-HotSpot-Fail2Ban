@@ -5,7 +5,7 @@
 
 ### 1. Включаем отправку логов из микротик на целевое устройство где будет установлен Fail2Ban
   * Замените IP адрес 192.168.1.2 целевого устройства сбора логов на свой
-  * /system loggin action add name=tosyslog target=remote remote=192.168.1.2 remote-port=514
+  * /system loggin action add name=remote target=remote remote=192.168.1.2 remote-port=514
   * /system loggin add action=remote topics=info,hotspot
 ### 2. Настраиваем rsyslog на прием логов с микротик
   * nano /etc/rsyslog.d/mikrotik.conf
