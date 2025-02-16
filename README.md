@@ -10,8 +10,6 @@
   * nano /etc/rsyslog.d/mikrotik.conf
   * наполнить mikrotik.conf содержимым
 
-[![copy](https://cdn.jsdelivr.net/gh/lalit2005/copii@master/assets/copy.svg)](https://copii.vercel.app/?ct=Hello%20Copii%20!!&tm=blk&lg=https://avatars.githubusercontent.com/u/69138026?s=60&v=4)
-
 ```js
 if $fromhost-ip == '192.168.1.1' then /var/log/mikrotik.log
 # Replace 192.168.1.1 with the IP address of your MikroTik router.
