@@ -16,6 +16,13 @@ if $fromhost-ip == '192.168.1.1' then /var/log/mikrotik.log
 # Замените IP адрес 192.168.1.1 на IP своего MikroTik.
 & stop
 ```
+  * открываем файл rsyslog.conf, nano /etc/rsyslog.conf
+  * Добавляем внего следующие строки для приема логов с микротик на порт 514
+```js
+module(load="imudp")
+input(type="imudp" port="514")
+```
+  * Или ищем аналогичные строки в rsyslog.conf и разкомментируем их    
   * Перезапускаем rsyslog, systemctl restart rsyslog
   * Необходимо немного подождать пока в лог начнут поступать данные
   * Проверяем что в лог пошли данные из микротик tail -f /var/log/mikrotik.log
