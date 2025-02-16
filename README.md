@@ -111,7 +111,9 @@ sshpass -p "$PASS" ssh -o StrictHostKeyChecking=no $USER@$ROUTER_IP "/ip firewal
 * chmod +x /etc/fail2ban/action.d/mikrotik-unban.sh
 * перезапускаем fail2ban, systemctl restart fail2ban
 
-### Добавляем правило в файрвол MikroTik
-* /ip firewall raw add chain=prerouting action=drop log=no src-address-list=fail2ban comment="Drop fail2ban address-list" 
+### 5. Добавляем правило в файрвол MikroTik для блокировки подборщиков из добавленного address-list
+* /ip firewall raw add chain=prerouting action=drop log=no src-address-list=fail2ban comment="Drop fail2ban address-list" place-before=0
+
+
 
 
