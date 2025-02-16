@@ -35,3 +35,12 @@ findtime = 600
 ```
 * Создадим фильтр mikrotik-hotspot для Fail2Ban
 * nano /etc/fail2ban/filter.d/mikrotik-hotspopt.conf
+* наполнить mikrotik-hotspopt.conf содержимым
+
+```js
+[Definition]
+failregex = ^.*hotspot,info,debug.*\(<HOST>\): login failed: user <.*> not found.*$
+ignoreregex =
+
+## Feb/09/2025 13:26:32 hotspot,info,debug 946802 (172.23.139.178): login failed: user <946802> not found
+```
