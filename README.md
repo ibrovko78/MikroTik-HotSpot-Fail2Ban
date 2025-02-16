@@ -58,3 +58,28 @@ actioncheck =
 actionban = /etc/fail2ban/action.d/mikrotik-ban.sh <ip>
 actionunban = /etc/fail2ban/action.d/mikrotik-unban.sh <ip>
 ```
+* Создадим два скрипта для actionban и actionunban, запускаемые при срабатываении действия
+* nano /etc/fail2ban/action.d/mikrotik-ban.sh
+* Замените 192.168.1.1 на IP адрес вашего микротик
+* наполнить файл содержимым
+```js
+#!/bin/bash
+IP=$1
+USER="admin"
+PASS="пароль микротик"
+ROUTER_IP="192.168.1.1"
+
+sshpass -p "$PASS" ssh -o StrictHostKeyChecking=no $USER@$ROUTER_IP "/ip firewall address-list add address=$IP list=fail2ban"
+```
+* nano /etc/fail2ban/action.d/mikrotik-unban.sh
+* Замените 192.168.1.1 на IP адрес вашего микротик
+* наполнить файл содержимым
+```js
+#!/bin/bash
+IP=$1
+USER="admin"
+PASS="пароль микротик"
+ROUTER_IP="192.168.1.1"
+
+sshpass -p "$PASS" ssh -o StrictHostKeyChecking=no $USER@$ROUTER_IP "/ip firewall address-list remove [find address=$IP list=fail2ban]"
+```
