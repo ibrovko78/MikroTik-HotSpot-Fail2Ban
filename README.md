@@ -16,6 +16,7 @@ if $fromhost-ip == '192.168.1.1' then /var/log/mikrotik.log
 # Замените IP адрес 192.168.1.1 на IP своего MikroTik.
 & stop
 ```
+  * Перезапускаем rsyslog, systemctl restart rsyslog
   * Проверяем что в лог пошли данные из микротик cat /var/log/mikrotik.log
 
 ### 3. Устанавливаем Fail2Ban и sshpass 
