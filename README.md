@@ -8,7 +8,7 @@
   * /system loggin add action=remote topics=info,hotspot
 ### 2. Настраиваем rsyslog на прием логов с микротик
   * nano /etc/rsyslog.d/mikrotik.conf
-  * наполнить mikrotik.conf содержимым
+  * наполнить файл содержимым
 
 ```js
 if $fromhost-ip == '192.168.1.1' then /var/log/mikrotik.log
@@ -20,7 +20,7 @@ if $fromhost-ip == '192.168.1.1' then /var/log/mikrotik.log
 ### 3. Устанавливаем Fail2Ban и sshpass 
 ### 4. Настраиваем Fail2Ban
   * nano /etc/fail2ban/jail.local
-  * наполнить jail.local содержимым
+  * наполнить файл содержимым
 
 ```js
 # Do all your modifications to the jail's configuration in jail.local!
@@ -34,13 +34,25 @@ bantime  = 15m
 findtime = 600
 ```
 * Создадим фильтр mikrotik-hotspot для Fail2Ban
-* nano /etc/fail2ban/filter.d/mikrotik-hotspopt.conf
-* наполнить mikrotik-hotspopt.conf содержимым
+* nano /etc/fail2ban/filter.d/mikrotik-hotspot.conf
+* наполнить файл содержимым
 
 ```js
 [Definition]
 failregex = ^.*hotspot,info,debug.*\(<HOST>\): login failed: user <.*> not found.*$
 ignoreregex =
 
-## Feb/09/2025 13:26:32 hotspot,info,debug 946802 (172.23.139.178): login failed: user <946802> not found
+## Feb/09/2025 13:26:32 hotspot,info,debug 989898 (172.23.139.178): login failed: user <989898> not found
+```
+* Создадим правило действия при срабатывании фильтра
+* nano /etc/fail2ban/action.d/mikrotik.conf
+* наполнить файл содержимым
+
+```js
+[Definition]
+actionstart =
+actionstop =
+actioncheck =
+actionban = /etc/fail2ban/action.d/mikrotik-ban.sh <ip>
+actionunban = /etc/fail2ban/action.d/mikrotik-unban.sh <ip>
 ```
