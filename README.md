@@ -17,7 +17,20 @@ if $fromhost-ip == '192.168.1.1' then /var/log/mikrotik.log
 & stop
 ```
   * Перезапускаем rsyslog, systemctl restart rsyslog
-  * Проверяем что в лог пошли данные из микротик cat /var/log/mikrotik.log
+  * Необходимо немного подождать пока в лог начнут поступать данные
+  * Проверяем что в лог пошли данные из микротик tail -f /var/log/mikrotik.log
+  
+  * Не забываем настроить logrotate для /var/log/mikrotik.log
+  * nano /etc/logrotate.d/mikrotik
+  * наполнить файл содержимым
+```js
+/var/log/mikrotik.log {
+    rotate 0
+    size=2M
+    missingok
+}
+```
+* перезапускаем logrotate, systemctl restart logrotate
 
 ### 3. Устанавливаем Fail2Ban и sshpass 
 ### 4. Настраиваем Fail2Ban
@@ -58,10 +71,12 @@ actioncheck =
 actionban = /etc/fail2ban/action.d/mikrotik-ban.sh <ip>
 actionunban = /etc/fail2ban/action.d/mikrotik-unban.sh <ip>
 ```
-* Создадим два скрипта для actionban и actionunban, запускаемые при срабатываении действия
+
+* Создадим два скрипта для actionban и actionunban, запускаемые при срабатываении фильтра
 * nano /etc/fail2ban/action.d/mikrotik-ban.sh
 * Замените 192.168.1.1 на IP адрес вашего микротик
 * наполнить файл содержимым
+
 ```js
 #!/bin/bash
 IP=$1
@@ -74,6 +89,7 @@ sshpass -p "$PASS" ssh -o StrictHostKeyChecking=no $USER@$ROUTER_IP "/ip firewal
 * nano /etc/fail2ban/action.d/mikrotik-unban.sh
 * Замените 192.168.1.1 на IP адрес вашего микротик
 * наполнить файл содержимым
+
 ```js
 #!/bin/bash
 IP=$1
@@ -83,3 +99,8 @@ ROUTER_IP="192.168.1.1"
 
 sshpass -p "$PASS" ssh -o StrictHostKeyChecking=no $USER@$ROUTER_IP "/ip firewall address-list remove [find address=$IP list=fail2ban]"
 ```
+* делаем скирипты исполняемыми
+* chmod +x /etc/fail2ban/action.d/mikrotik-ban.sh
+* chmod +x /etc/fail2ban/action.d/mikrotik-unban.sh
+* перезапускаем fail2ban, systemctl restart fail2ban
+
