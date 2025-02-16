@@ -14,8 +14,10 @@
 
 ```js
 if $fromhost-ip == '192.168.1.1' then /var/log/mikrotik.log
-#Replace 192.168.1.1 with the IP address of your MikroTik router.
+# Replace 192.168.1.1 with the IP address of your MikroTik router.
 & stop
 ```
-3. Устанавливаем Fail2Ban, для DEBIAN apt install fail2Ban, (используйте пакетный менеджер в зависмости от вашей ОС Linux)
+  * Проверяем что в лог пошли данные из микротик cat /var/log/mikrotik.log
+
+### 3. Устанавливаем Fail2Ban и sshpass 
 4.
