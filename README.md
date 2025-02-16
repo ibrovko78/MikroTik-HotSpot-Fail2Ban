@@ -57,6 +57,8 @@ bantime  = 15m
 findtime = 600
 ```
 * Создадим фильтр mikrotik-hotspot для Fail2Ban
+* В моем примере username=password поэтому failregex будет именно такой
+* При необходимости доработайте failregex под свои нужды заменив несколько слов в выражении.
 * nano /etc/fail2ban/filter.d/mikrotik-hotspot.conf
 * наполнить файл содержимым
 
@@ -65,6 +67,7 @@ findtime = 600
 failregex = ^.*hotspot,info,debug.*\(<HOST>\): login failed: user <.*> not found.*$
 ignoreregex =
 
+## пример строки из лог файла, для которой составлено failregex
 ## Feb/09/2025 13:26:32 hotspot,info,debug 989898 (172.23.139.178): login failed: user <989898> not found
 ```
 * Создадим правило действия при срабатывании фильтра
