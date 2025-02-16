@@ -9,7 +9,7 @@
 2. Настраиваем rsyslog на прием логов с микротик
   * nano /etc/rsyslog.d/mikrotik.conf
   * наполнить mikrotik.conf содержимым
-  * `if $fromhost-ip == '192.168.1.1' then /var/log/mikrotik.log`
+  * if $fromhost-ip == '192.168.1.1' then /var/log/mikrotik.log
     `# Replace 192.168.1.1 with the IP address of your MikroTik router.`
     `& stop`
   * 
