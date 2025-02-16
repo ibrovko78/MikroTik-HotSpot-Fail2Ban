@@ -20,4 +20,17 @@ if $fromhost-ip == '192.168.1.1' then /var/log/mikrotik.log
   * Проверяем что в лог пошли данные из микротик cat /var/log/mikrotik.log
 
 ### 3. Устанавливаем Fail2Ban и sshpass 
-4.
+### 4. Настраиваем Fail2Ban
+  * nano /etc/fail2ban/jail.local
+
+```js
+# Do all your modifications to the jail's configuration in jail.local!
+[mikrotik-hotspot]
+enabled  = true
+filter   = mikrotik-hotspot
+action   = mikrotik
+logpath  = /var/log/mikrotik.log
+maxretry = 3
+bantime  = 15m
+findtime = 600
+```
