@@ -6,4 +6,8 @@
 1. Включаем отправку логов из микротик на целевое устройство где будет установлен Fail2Ban
   * /system loggin action add name=tosyslog target=remote remote=IP remote-port=514
   * /system loggin add action=remote topics=info,hotspot
-2. Устанавливаем Fail2Ban apt install fail2Ban (пакетный менеджер в зависмости от вашей ОС Linux)
+2. Настраиваем rsyslog на прием логов с микротик
+  * nano /etc/rsyslog.d
+  * 
+3. Устанавливаем Fail2Ban, для DEBIAN apt install fail2Ban, (используйте пакетный менеджер в зависмости от вашей ОС Linux)
+4.
