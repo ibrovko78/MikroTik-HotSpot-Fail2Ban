@@ -12,7 +12,7 @@
   * наполнить файл содержимым
 ```js
 if $fromhost-ip == '192.168.1.1' then /var/log/mikrotik.log
-# Замените IP адрес 192.168.1.1 на IP своего MikroTik.
+# Replace IP address 192.168.1.1 to your IP MikroTik.
 & stop
 ```
   
@@ -67,7 +67,7 @@ findtime = 600
 failregex = ^.*hotspot,info,debug.*\(<HOST>\): login failed: user <.*> not found.*$
 ignoreregex =
 
-## пример строки из лог файла, для которой составлено failregex
+## Example failregex
 ## Feb/09/2025 13:26:32 hotspot,info,debug 989898 (172.23.139.178): login failed: user <989898> not found
 ```
 * Создадим правило действия при срабатывании фильтра
