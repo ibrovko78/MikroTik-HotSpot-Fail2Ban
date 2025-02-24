@@ -12,7 +12,7 @@
   * наполнить файл содержимым
 ```js
 if $fromhost-ip == '192.168.1.1' then /var/log/mikrotik.log
-# Replace IP address 192.168.1.1 to your IP MikroTik.
+# Replace IP address 192.168.1.1 of your IP MikroTik.
 & stop
 ```
   
